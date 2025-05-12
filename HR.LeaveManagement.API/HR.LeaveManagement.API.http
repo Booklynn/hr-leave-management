@@ -1,0 +1,11 @@
+@HR.LeaveManagement.API_HostAddress = http://localhost:5166
+
+GET {{HR.LeaveManagement.API_HostAddress}}/api/LeaveTypes
+Accept: application/json
+
+###
+
+GET {{HR.LeaveManagement.API_HostAddress}}/api/LeaveTypes/1
+Accept: application/json
+
+###
