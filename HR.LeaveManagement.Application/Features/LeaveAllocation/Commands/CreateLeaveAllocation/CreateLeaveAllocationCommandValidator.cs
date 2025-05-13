@@ -3,11 +3,11 @@ using HR.LeaveManagement.Application.Contracts.Persistence;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
 
-public class CreateLeaveAllowcationCommandValidator : AbstractValidator<CreateLeaveAllocationCommand>
+public class CreateLeaveAllocationCommandValidator : AbstractValidator<CreateLeaveAllocationCommand>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
 
-    public CreateLeaveAllowcationCommandValidator(ILeaveTypeRepository leaveTypeRepository)
+    public CreateLeaveAllocationCommandValidator(ILeaveTypeRepository leaveTypeRepository)
     {
         _leaveTypeRepository = leaveTypeRepository;
 
