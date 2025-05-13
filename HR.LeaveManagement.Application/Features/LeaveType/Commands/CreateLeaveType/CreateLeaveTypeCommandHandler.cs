@@ -18,13 +18,13 @@ public class CreateLeaveTypeCommandHandler(
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Count != 0)
         {
-            logger.LogWarning("Validation errors in create request for {0} - {1}", nameof(LeaveType), request);
-            throw new BadRequestException("Invalid LeaveType", validationResult);
+            logger.LogWarning("{@LeaveType} - Validation errors while processing request for {@request}", nameof(LeaveType), request);
+            throw new BadRequestException("Invalid LeaveType request", validationResult);
         }
 
         var leaveTypeToCreate = mapper.Map(request);
         await leaveTypeRepository.CreateAsync(leaveTypeToCreate);
-        logger.LogInformation("{LeaveType} ({Id}) was created successfully", nameof(LeaveType), leaveTypeToCreate.Id);
+        logger.LogInformation("{@LeaveType} - {@Id} was created successfully", nameof(LeaveType), leaveTypeToCreate.Id);
 
         return leaveTypeToCreate.Id;
     }

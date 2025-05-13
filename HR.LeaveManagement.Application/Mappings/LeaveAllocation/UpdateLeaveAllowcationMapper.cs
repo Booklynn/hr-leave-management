@@ -4,11 +4,10 @@ namespace HR.LeaveManagement.Application.Mappings.LeaveAllocation;
 
 public class UpdateLeaveAllowcationMapper : IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
 {
-    public Domain.LeaveAllocation Map(UpdateLeaveAllocationCommand dto, Domain.LeaveAllocation existingEntity)
+    public void Map(UpdateLeaveAllocationCommand dto, Domain.LeaveAllocation leaveAllocation)
     {
-        existingEntity.NumberOfDays = dto.NumberOfDays;
-        existingEntity.LeaveTypeId = dto.LeaveTypeId;
-        existingEntity.Period = dto.Period;
-        return existingEntity;
+        leaveAllocation.NumberOfDays = dto.NumberOfDays;
+        leaveAllocation.LeaveTypeId = dto.LeaveTypeId;
+        leaveAllocation.Period = dto.Period;
     }
 }

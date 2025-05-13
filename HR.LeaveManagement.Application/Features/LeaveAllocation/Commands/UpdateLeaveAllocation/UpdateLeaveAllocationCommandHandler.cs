@@ -20,26 +20,22 @@ public class UpdateLeaveAllocationCommandHandler(
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Count != 0)
         {
-            logger.LogWarning("Validation errors in update request for {0} - {1}", nameof(LeaveAllocation), request);
+            logger.LogWarning("{@LeaveAllocation} - Validation errors while processing update for {@request}", nameof(LeaveAllocation), request);
             throw new BadRequestException("Invalid LeaveAllocation request", validationResult);
         }
 
-        var leaveAllowcation = await leaveAllocationRepository.GetByIdAsync(request.Id);
-        if (leaveAllowcation == null)
+        var leaveAllowcationToUpdate = await leaveAllocationRepository.GetByIdAsync(request.Id);
+        if (leaveAllowcationToUpdate == null)
         {
-            logger.LogWarning("{LeaveAllocation} ({Id}) was not found", nameof(LeaveAllocation), request.Id);
+            logger.LogWarning("{@LeaveAllocation} - {@Id} was not found", nameof(LeaveAllocation), request.Id);
             throw new NotFoundException(nameof(LeaveAllocation), request.Id);
         }
 
-        var leaveAllowcationToUpdate = mapper.Map(request, leaveAllowcation);
-        if (leaveAllowcationToUpdate == null)
-        {
-            logger.LogWarning("{LeaveAllocation} - Invalid mapping from request to entity", nameof(LeaveAllocation), request);
-            throw new InvalidMapRequestToEntity(nameof(LeaveAllocation), request);
-        }
+        mapper.Map(request, leaveAllowcationToUpdate);
 
         await leaveAllocationRepository.UpdateAsync(leaveAllowcationToUpdate);
+        logger.LogInformation("{@LeaveAllocation} - @Id was created successfully", nameof(LeaveAllocation), leaveAllowcationToUpdate.Id);
 
-        return leaveAllowcation.Id;
+        return leaveAllowcationToUpdate.Id;
     }
 }

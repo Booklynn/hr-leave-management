@@ -1,6 +1,6 @@
 ﻿namespace HR.LeaveManagement.Application.Mappings;
 
-public interface ICreateMapper<TSource, TDto> where TSource : class where TDto : class
+public interface ICreateMapper<TSource, TDTO> where TSource : class where TDTO : class
 {
-    TDto Map(TSource source);
+    TDTO Map(TSource source);
 }

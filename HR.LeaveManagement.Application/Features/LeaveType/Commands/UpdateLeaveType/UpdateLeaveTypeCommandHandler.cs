@@ -18,27 +18,22 @@ public class UpdateLeaveTypeCommandHandler(
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Count != 0)
         {
-            logger.LogWarning("Validation errors in update request for {0} - {1}", nameof(LeaveType), request.Id);
+            logger.LogWarning("{@LeaveType} - Validation errors while processing request for {@request}", nameof(LeaveType), request);
             throw new BadRequestException("Invalid LeaveType", validationResult);
         }
 
-        var leaveType = await leaveTypeRepository.GetByIdAsync(request.Id);
-        if (leaveType == null)
+        var leaveTypeToUpdate = await leaveTypeRepository.GetByIdAsync(request.Id);
+        if (leaveTypeToUpdate == null)
         {
-            logger.LogWarning("{LeaveType} ({Id}) was not found", nameof(LeaveType), request.Id);
+            logger.LogWarning("{@LeaveType} - {@Id} was not found", nameof(LeaveType), request.Id);
             throw new NotFoundException(nameof(LeaveType), request.Id);
         }
 
-        var leaveTypeToUpdate = mapper.Map(request, leaveType);
-        if (leaveTypeToUpdate == null)
-        {
-            logger.LogWarning("{LeaveType} - Invalid mapping from request to entity", nameof(LeaveType), request);
-            throw new InvalidMapRequestToEntity(nameof(LeaveType), request);
-        }
+        mapper.Map(request, leaveTypeToUpdate);
 
         await leaveTypeRepository.UpdateAsync(leaveTypeToUpdate);
-        logger.LogInformation("{LeaveType} ({Id}) was updated successfully", nameof(LeaveType), leaveTypeToUpdate.Id);
-        
+        logger.LogInformation("{@LeaveType} - {@Id} was updated successfully", nameof(LeaveType), leaveTypeToUpdate.Id);
+
         return leaveTypeToUpdate.Id;
     }
 }

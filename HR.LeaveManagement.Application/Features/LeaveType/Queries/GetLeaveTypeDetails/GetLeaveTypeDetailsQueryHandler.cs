@@ -18,11 +18,11 @@ public class GetLeaveTypeDetailsQueryHandler(
         var leaveType = await leaveTypeRepository.GetByIdAsync(request.Id);
         if (leaveType == null)
         {
-            logger.LogWarning("{LeaveType} ({Id}) was not found", nameof(LeaveType), request.Id);
+            logger.LogWarning("{@LeaveType} - {@Id} was not found", nameof(LeaveType), request.Id);
             throw new NotFoundException(nameof(LeaveType), request.Id);
         }
 
-        logger.LogInformation("{LeaveType} ({Id}) was retrieved successfully", nameof(LeaveType), leaveType.Id);
+        logger.LogInformation("{@LeaveType} - {@Id} was retrieved successfully", nameof(LeaveType), leaveType.Id);
         return mapper.Map(leaveType);
     }
 }

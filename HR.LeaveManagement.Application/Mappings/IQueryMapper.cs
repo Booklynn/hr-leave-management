@@ -1,12 +1,13 @@
-﻿using HR.LeaveManagement.Domain.Common;
+﻿using HR.LeaveManagement.Application.Models;
+using HR.LeaveManagement.Domain.Common;
 
 namespace HR.LeaveManagement.Application.Mappings;
 
-public interface IQueryMapper<TEntity, TDto> where TEntity : BaseEntity where TDto : class
+public interface IQueryMapper<TEntity, TDTO> where TEntity : BaseEntity where TDTO : class
 {
-    TDto Map(TEntity source);
+    TDTO Map(TEntity source);
 
-    IEnumerable<TDto> MapMany(IEnumerable<TEntity> sources)
+    IEnumerable<TDTO> MapMany(IEnumerable<TEntity> sources)
     {
         return sources?.Select(Map) ?? [];
     }

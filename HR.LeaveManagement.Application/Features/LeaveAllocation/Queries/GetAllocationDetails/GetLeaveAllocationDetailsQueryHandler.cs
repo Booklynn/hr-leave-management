@@ -17,11 +17,11 @@ public class GetLeaveAllocationDetailsQueryHandler(ILeaveAllocationRepository re
         var leaveAllocation = await repository.GetLeaveAllocationWithDetails(request.Id);
         if (leaveAllocation == null)
         {
-            logger.LogWarning("{LeaveType} ({Id}) was not found", nameof(LeaveAllocation), request.Id);
+            logger.LogWarning("{@LeaveAllocation} - {@Id} was not found", nameof(LeaveAllocation), request.Id);
             throw new NotFoundException(nameof(LeaveAllocation), request.Id);
         }
 
-        logger.LogInformation("{LeaveType} ({Id}) was retrieved successfully", nameof(LeaveAllocation), leaveAllocation.Id);
+        logger.LogInformation("{@LeaveAllocation} - {@Id} was retrieved successfully", nameof(LeaveAllocation), leaveAllocation.Id);
         return mapper.Map(leaveAllocation);
     }
 }

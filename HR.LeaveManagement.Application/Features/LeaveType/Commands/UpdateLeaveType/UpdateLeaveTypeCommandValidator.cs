@@ -14,17 +14,19 @@ public class UpdateLeaveTypeCommandValidator : AbstractValidator<UpdateLeaveType
         RuleFor(request => request.Id)
             .NotEmpty().WithMessage("{PropertyName} is required")
             .NotNull().WithMessage("{PropertyName} is required")
-            .GreaterThan(0)
+            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
             .MustAsync(LeaveTypeExists).WithMessage("Leave type does not exist");
 
         RuleFor(request => request.Name)
-            .NotEmpty().WithMessage("{PropertyName} is required")
-            .NotNull().WithMessage("{PropertyName} is required")
-            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than 70 characters")
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than {ComparisonValue} characters.")
             .MustAsync(LeaveTypeNameUnique).WithMessage("Leave type already exists.");
 
         RuleFor(request => request.DefaultDays)
-           .InclusiveBetween(1, 100).WithMessage("{PropertyName} must be between 1 and 100.");
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .InclusiveBetween(1, 100).WithMessage("{PropertyName} must be between {ComparisonValue}.");
     }
 
     private async Task<bool> LeaveTypeExists(int id, CancellationToken token)

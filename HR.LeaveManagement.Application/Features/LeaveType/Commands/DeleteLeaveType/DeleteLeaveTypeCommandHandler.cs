@@ -12,12 +12,12 @@ public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeReposit
         var leaveTypeToDelete = await leaveTypeRepository.GetByIdAsync(request.Id);
         if (leaveTypeToDelete == null)
         {
-            logger.LogWarning("{LeaveType} ({Id}) was not found for deleting", nameof(LeaveType), request.Id);
+            logger.LogWarning("{@LeaveType} - {@Id} was not found for deleting", nameof(LeaveType), request.Id);
             throw new NotFoundException(nameof(LeaveType), request.Id);
         }
 
         await leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
-        logger.LogInformation("{LeaveType} ({Id}) was deleted successfully", nameof(LeaveType), leaveTypeToDelete.Id);
+        logger.LogInformation("{@LeaveType} - {@Id} was deleted successfully", nameof(LeaveType), leaveTypeToDelete.Id);
 
         return leaveTypeToDelete.Id;
     }

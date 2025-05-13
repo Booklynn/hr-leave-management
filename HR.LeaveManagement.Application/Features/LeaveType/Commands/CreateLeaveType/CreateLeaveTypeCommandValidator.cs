@@ -12,20 +12,19 @@ public class CreateLeaveTypeCommandValidator : AbstractValidator<CreateLeaveType
         _leaveTypeRepository = leaveTypeRepository;
 
         RuleFor(request => request.Name)
-            .NotEmpty().WithMessage("{PropertyName} is required")
-            .NotNull().WithMessage("{PropertyName} is required")
-            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than 70 characters");
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than {ComparisonValue} characters.")
+            .MustAsync(LeaveTypeNameUnique).WithMessage("Leave type already exists.");
 
         RuleFor(request => request.DefaultDays)
-           .InclusiveBetween(1, 100).WithMessage("{PropertyName} must be between 1 and 100.");
-
-        RuleFor(request => request)
-            .MustAsync(LeaveTypeNameUnique)
-            .WithMessage("Leave type already exists");
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .InclusiveBetween(1, 100).WithMessage("{PropertyName} must be between {ComparisonValue}.");
     }
 
-    private async Task<bool> LeaveTypeNameUnique(CreateLeaveTypeCommand command, CancellationToken token)
+    private async Task<bool> LeaveTypeNameUnique(string name, CancellationToken token)
     {
-        return await _leaveTypeRepository.IsLeaveTypeUnique(command.Name);
+        return await _leaveTypeRepository.IsLeaveTypeUnique(name);
     }
 }

@@ -15,7 +15,7 @@ public class GetLeaveAllocationsQueryHandler(
     public async Task<IReadOnlyList<LeaveAllocationDTO>> Handle(GetLeaveAllocationsQuery request)
     {
         var leaveAllocations = await leaveAllocationRepository.GetListLeaveAllocationsWithDetails();
-        logger.LogInformation("{LeaveAllocation} were retrieved successfully", nameof(LeaveAllocation));
+        logger.LogInformation("{@LeaveAllocation} were retrieved successfully", nameof(LeaveAllocation));
         return [.. mapper.MapMany(leaveAllocations)];
     }
 }

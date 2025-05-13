@@ -19,7 +19,7 @@ public class CreateLeaveAllocationCommandHandler(
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Count != 0)
         {
-            logger.LogWarning("Validation errors in create request for {0} - {1}", nameof(LeaveAllocation), request);
+            logger.LogWarning("{@LeaveAllocation} - Validation errors while processing create for {@request}", nameof(LeaveAllocation), request);
             throw new BadRequestException("Invalid LeaveAllocation request", validationResult);
         }
 

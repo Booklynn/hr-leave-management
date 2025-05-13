@@ -4,10 +4,9 @@ namespace HR.LeaveManagement.Application.Mappings.LeaveType;
 
 public class UpdateLeaveTypeMapper : IUpdateMapper<UpdateLeaveTypeCommand, Domain.LeaveType>
 {
-    public Domain.LeaveType Map(UpdateLeaveTypeCommand dto, Domain.LeaveType existingLeaveType)
+    public void Map(UpdateLeaveTypeCommand dto, Domain.LeaveType leaveType)
     {
-        existingLeaveType.Name = dto.Name;
-        existingLeaveType.DefaultDays = dto.DefaultDays;
-        return existingLeaveType;
+        leaveType.Name = dto.Name;
+        leaveType.DefaultDays = dto.DefaultDays;
     }
 }

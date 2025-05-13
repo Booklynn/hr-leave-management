@@ -15,7 +15,7 @@ public class GetLeaveTypesQueryHandler(
     public async Task<IReadOnlyList<LeaveTypeDTO>> Handle(GetLeaveTypesQuery request)
     {
         var leaveTypes = await leaveTypeRepository.GetListAsync();
-        logger.LogInformation("{LeaveType} were retrieved successfully", nameof(LeaveType));
+        logger.LogInformation("{@LeaveType} were retrieved successfully", nameof(LeaveType));
         return [.. mapper.MapMany(leaveTypes)];
     }
 }

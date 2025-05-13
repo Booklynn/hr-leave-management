@@ -20,27 +20,26 @@ public class UpdateLeaveAllocationCommandValidator : AbstractValidator<UpdateLea
         _dateTimeProvider = dateTimeProvider;
 
         RuleFor(request => request.Id)
-            .NotEmpty().WithMessage("{PropertyName} is required")
-            .NotNull().WithMessage("{PropertyName} is required")
-            .GreaterThan(0)
-            .MustAsync(LeaveAllowcationExists).WithMessage("Leave type does not exist");
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
+            .MustAsync(LeaveAllowcationExists).WithMessage("Leave type does not exist.");
 
         RuleFor(request => request.NumberOfDays)
-            .NotNull().WithMessage("{PropertyName} is required")
-            .NotEmpty().WithMessage("{PropertyName} is required")
-            .GreaterThan(0).WithMessage("{PropertyName} must greather than {ComparisonValue}");
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.");
 
         RuleFor(request => request.LeaveTypeId)
-            .NotEmpty().WithMessage("{PropertyName} is required")
-            .NotNull().WithMessage("{PropertyName} is required")
-            .GreaterThan(0)
-            .MustAsync(LeaveTypeExists)
-            .WithMessage("Leave type does not exist");
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
+            .MustAsync(LeaveTypeExists).WithMessage("Leave type does not exist.");
 
         RuleFor(request => request.Period)
             .NotNull().WithMessage("{PropertyName} is required")
             .NotEmpty().WithMessage("{PropertyName} is required")
-            .GreaterThanOrEqualTo(_dateTimeProvider.Now.Year).WithMessage("{PropertyName} must be after {ComparisonValue}");
+            .GreaterThanOrEqualTo(_dateTimeProvider.Now.Year).WithMessage("{PropertyName} must be after {ComparisonValue}.");
     }
 
     private async Task<bool> LeaveTypeExists(int id, CancellationToken token)

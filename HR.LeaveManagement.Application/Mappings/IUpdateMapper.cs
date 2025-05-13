@@ -2,7 +2,7 @@
 
 namespace HR.LeaveManagement.Application.Mappings;
 
-public interface IUpdateMapper<TDto, TEntity> where TDto : class where TEntity : BaseEntity
+public interface IUpdateMapper<TDTO, TEntity> where TDTO : class where TEntity : BaseEntity
 {
-    TEntity Map(TDto dto, TEntity existingEntity);
+    void Map(TDTO dto, TEntity entity);
 }
