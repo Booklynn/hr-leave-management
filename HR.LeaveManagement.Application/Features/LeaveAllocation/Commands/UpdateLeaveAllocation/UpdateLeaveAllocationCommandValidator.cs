@@ -23,7 +23,7 @@ public class UpdateLeaveAllocationCommandValidator : AbstractValidator<UpdateLea
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} is required.")
             .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
-            .MustAsync(LeaveAllowcationExists).WithMessage("Leave type does not exist.");
+            .MustAsync(LeaveAllocationExists).WithMessage("Leave type does not exist.");
 
         RuleFor(request => request.NumberOfDays)
             .NotNull().WithMessage("{PropertyName} is required.")
@@ -47,7 +47,7 @@ public class UpdateLeaveAllocationCommandValidator : AbstractValidator<UpdateLea
         return await _leaveTypeRepository.DoesLeaveTypeExist(id);
     }
 
-    private async Task<bool> LeaveAllowcationExists(int id, CancellationToken token)
+    private async Task<bool> LeaveAllocationExists(int id, CancellationToken token)
     {
         return await _leaveAllocationRepository.DoesLeaveTypeExist(id);
     }

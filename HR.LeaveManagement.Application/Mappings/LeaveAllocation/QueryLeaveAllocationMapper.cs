@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
 namespace HR.LeaveManagement.Application.Mappings.LeaveAllocation;
 
-public class LeaveAllocationToDTOMapper : IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDTO>
+public class QueryLeaveAllocationMapper : IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDTO>
 {
     public LeaveAllocationDTO Map(Domain.LeaveAllocation source)
     {

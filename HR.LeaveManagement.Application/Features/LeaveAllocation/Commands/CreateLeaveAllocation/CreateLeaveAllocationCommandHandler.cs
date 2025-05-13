@@ -15,7 +15,7 @@ public class CreateLeaveAllocationCommandHandler(
 {
     public async Task<int> Handle(CreateLeaveAllocationCommand request)
     {
-        var validator = new CreateLeaveAllowcationCommandValidator(leaveTypeRepository);
+        var validator = new CreateLeaveAllocationCommandValidator(leaveTypeRepository);
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Count != 0)
         {

@@ -2,7 +2,7 @@
 
 namespace HR.LeaveManagement.Application.Mappings.LeaveAllocation;
 
-public class UpdateLeaveAllowcationMapper : IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
+public class UpdateLeaveAllocationMapper : IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
 {
     public void Map(UpdateLeaveAllocationCommand dto, Domain.LeaveAllocation leaveAllocation)
     {

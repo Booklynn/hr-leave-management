@@ -24,18 +24,18 @@ public class UpdateLeaveAllocationCommandHandler(
             throw new BadRequestException("Invalid LeaveAllocation request", validationResult);
         }
 
-        var leaveAllowcationToUpdate = await leaveAllocationRepository.GetByIdAsync(request.Id);
-        if (leaveAllowcationToUpdate == null)
+        var leaveAllocationToUpdate = await leaveAllocationRepository.GetByIdAsync(request.Id);
+        if (leaveAllocationToUpdate == null)
         {
             logger.LogWarning("{@LeaveAllocation} - {@Id} was not found", nameof(LeaveAllocation), request.Id);
             throw new NotFoundException(nameof(LeaveAllocation), request.Id);
         }
 
-        mapper.Map(request, leaveAllowcationToUpdate);
+        mapper.Map(request, leaveAllocationToUpdate);
 
-        await leaveAllocationRepository.UpdateAsync(leaveAllowcationToUpdate);
-        logger.LogInformation("{@LeaveAllocation} - @Id was created successfully", nameof(LeaveAllocation), leaveAllowcationToUpdate.Id);
+        await leaveAllocationRepository.UpdateAsync(leaveAllocationToUpdate);
+        logger.LogInformation("{@LeaveAllocation} - @Id was created successfully", nameof(LeaveAllocation), leaveAllocationToUpdate.Id);
 
-        return leaveAllowcationToUpdate.Id;
+        return leaveAllocationToUpdate.Id;
     }
 }
