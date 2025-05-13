@@ -2,9 +2,9 @@
 
 namespace HR.LeaveManagement.Application.ManualMappings.LeaveAllocation;
 
-public class CreateLeaveAllowcationMapper : IManualMapper<CreateLeaveAllocationCommand, Domain.LeaveAllocation>
+public class CreateLeaveAllowcationMapper : ICreateMapper<CreateLeaveAllocationCommand, Domain.LeaveAllocation>
 {
-    public Domain.LeaveAllocation ManualMap(CreateLeaveAllocationCommand source)
+    public Domain.LeaveAllocation Map(CreateLeaveAllocationCommand source)
     {
         return new Domain.LeaveAllocation
         {

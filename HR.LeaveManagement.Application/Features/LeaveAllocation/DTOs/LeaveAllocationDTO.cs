@@ -1,8 +1,8 @@
-﻿using HR.LeaveManagement.Application.Features.LeaveType.DTO;
+﻿using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
-namespace HR.LeaveManagement.Application.Features.LeaveAllocation.DTO;
+namespace HR.LeaveManagement.Application.Features.LeaveAllocation.DTOs;
 
-public class LeaveAllocationDetailsDTO
+public class LeaveAllocationDTO
 {
     public int Id { get; set; }
     public int NumberOfDays { get; set; }

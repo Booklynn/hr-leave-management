@@ -2,13 +2,13 @@
 using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
-using HR.LeaveManagement.Application.Features.LeaveAllocation.DTO;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.DTOs;
 using HR.LeaveManagement.Application.ManualMappings;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAllocationDetails;
 
 public class GetLeaveAllocationDetailsQueryHandler(ILeaveAllocationRepository repository, 
-    IManualMapper<Domain.LeaveAllocation, LeaveAllocationDetailsDTO> mapper, 
+    IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDetailsDTO> mapper, 
     IAppLogger<GetLeaveAllocationDetailsQueryHandler> logger) 
     : IRequestHandler<GetLeaveAllocationDetailsQuery, LeaveAllocationDetailsDTO>
 {
@@ -22,6 +22,6 @@ public class GetLeaveAllocationDetailsQueryHandler(ILeaveAllocationRepository re
         }
 
         logger.LogInformation("{LeaveType} ({Id}) was retrieved successfully", nameof(LeaveAllocation), leaveAllocation.Id);
-        return mapper.ManualMap(leaveAllocation);
+        return mapper.Map(leaveAllocation);
     }
 }

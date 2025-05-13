@@ -2,7 +2,7 @@
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
-using HR.LeaveManagement.Application.Features.LeaveType.DTO;
+using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetListLeaveTypes;
 using Microsoft.AspNetCore.Mvc;

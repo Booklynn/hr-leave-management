@@ -20,13 +20,13 @@ public static class ApplicationServiceRegistration
     {
         var mapperTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.GetInterfaces()
-                .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IManualMapper<,>)))
+                .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQueryMapper<,>)))
             .ToList();
 
         foreach (var mapperType in mapperTypes)
         {
             var interfaces = mapperType.GetInterfaces()
-                .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IManualMapper<,>));
+                .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQueryMapper<,>));
 
             services.AddScoped(interfaces, mapperType);
         }

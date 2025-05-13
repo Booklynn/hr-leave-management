@@ -9,7 +9,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.Creat
 public class CreateLeaveAllocationCommandHandler(
     ILeaveTypeRepository leaveTypeRepository,
     ILeaveAllocationRepository leaveAllocationRepository,
-    IManualMapper<CreateLeaveAllocationCommand, Domain.LeaveAllocation> mapper,
+    ICreateMapper<CreateLeaveAllocationCommand, Domain.LeaveAllocation> mapper,
     IAppLogger<CreateLeaveAllocationCommandHandler> logger) 
     : IRequestHandler<CreateLeaveAllocationCommand, int>
 {
@@ -26,7 +26,7 @@ public class CreateLeaveAllocationCommandHandler(
         var leaveType = await leaveTypeRepository.GetByIdAsync(request.LeaveTypeId);
         
         
-        var leaveAllocation = mapper.ManualMap(request);
+        var leaveAllocation = mapper.Map(request);
 
 
         await leaveAllocationRepository.CreateAsync(leaveAllocation);

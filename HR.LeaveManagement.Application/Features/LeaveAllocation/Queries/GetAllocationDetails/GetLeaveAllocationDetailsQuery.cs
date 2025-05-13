@@ -1,5 +1,5 @@
 ﻿using HR.LeaveManagement.Application.Common;
-using HR.LeaveManagement.Application.Features.LeaveAllocation.DTO;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.DTOs;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAllocationDetails;
 

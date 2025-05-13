@@ -1,18 +1,14 @@
-﻿using HR.LeaveManagement.Application.Contracts.Persistence;
-using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
+﻿using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 
 namespace HR.LeaveManagement.Application.ManualMappings.LeaveAllocation;
 
-public class UpdateLeaveAllowcationMapper : IManualMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
+public class UpdateLeaveAllowcationMapper : IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
 {
-    public Domain.LeaveAllocation ManualMap(UpdateLeaveAllocationCommand source)
+    public Domain.LeaveAllocation Map(UpdateLeaveAllocationCommand dto, Domain.LeaveAllocation existingEntity)
     {
-        return new Domain.LeaveAllocation
-        {
-            Id = source.Id,
-            NumberOfDays = source.NumberOfDays,
-            LeaveTypeId = source.LeaveTypeId,
-            Period = source.Period
-        };
+        existingEntity.NumberOfDays = dto.NumberOfDays;
+        existingEntity.LeaveTypeId = dto.LeaveTypeId;
+        existingEntity.Period = dto.Period;
+        return existingEntity;
     }
 }

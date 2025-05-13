@@ -1,14 +1,14 @@
 ﻿using HR.LeaveManagement.Application.Common;
 using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
-using HR.LeaveManagement.Application.Features.LeaveType.DTO;
+using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.ManualMappings;
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetListLeaveTypes;
 
 public class GetLeaveTypesQueryHandler(
     ILeaveTypeRepository leaveTypeRepository,
-    IManualMapper<Domain.LeaveType, LeaveTypeDTO> mapper,
+    IQueryMapper<Domain.LeaveType, LeaveTypeDTO> mapper,
     IAppLogger<GetLeaveTypesQueryHandler> logger) 
     : IRequestHandler<GetLeaveTypesQuery, List<LeaveTypeDTO>>
 {
@@ -16,6 +16,6 @@ public class GetLeaveTypesQueryHandler(
     {
         var leaveTypes = await leaveTypeRepository.GetListAsync();
         logger.LogInformation("{LeaveType} were retrieved successfully", nameof(LeaveType));
-        return [.. mapper.ManualMapMany(leaveTypes)];
+        return [.. mapper.MapMany(leaveTypes)];
     }
 }

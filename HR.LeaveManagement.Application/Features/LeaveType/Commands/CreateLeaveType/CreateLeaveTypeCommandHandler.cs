@@ -8,7 +8,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeave
 
 public class CreateLeaveTypeCommandHandler(
     ILeaveTypeRepository leaveTypeRepository,
-    IManualMapper<CreateLeaveTypeCommand, Domain.LeaveType> mapper,
+    ICreateMapper<CreateLeaveTypeCommand, Domain.LeaveType> mapper,
     IAppLogger<CreateLeaveTypeCommandHandler> logger)
     : IRequestHandler<CreateLeaveTypeCommand, int>
 {
@@ -22,7 +22,7 @@ public class CreateLeaveTypeCommandHandler(
             throw new BadRequestException("Invalid LeaveType", validationResult);
         }
 
-        var leaveTypeToCreate = mapper.ManualMap(request);
+        var leaveTypeToCreate = mapper.Map(request);
         await leaveTypeRepository.CreateAsync(leaveTypeToCreate);
         logger.LogInformation("{LeaveType} ({Id}) was created successfully", nameof(LeaveType), leaveTypeToCreate.Id);
 

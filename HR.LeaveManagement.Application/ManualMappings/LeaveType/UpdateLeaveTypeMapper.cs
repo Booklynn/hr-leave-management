@@ -2,15 +2,12 @@
 
 namespace HR.LeaveManagement.Application.ManualMappings.LeaveType;
 
-public class UpdateLeaveTypeMapper : IManualMapper<UpdateLeaveTypeCommand, Domain.LeaveType>
+public class UpdateLeaveTypeMapper : IUpdateMapper<UpdateLeaveTypeCommand, Domain.LeaveType>
 {
-    public Domain.LeaveType ManualMap(UpdateLeaveTypeCommand source)
+    public Domain.LeaveType Map(UpdateLeaveTypeCommand dto, Domain.LeaveType existingLeaveType)
     {
-        return new Domain.LeaveType()
-        {
-            Id = source.Id,
-            Name = source.Name,
-            DefaultDays = source.DefaultDays
-        };
+        existingLeaveType.Name = dto.Name;
+        existingLeaveType.DefaultDays = dto.DefaultDays;
+        return existingLeaveType;
     }
 }

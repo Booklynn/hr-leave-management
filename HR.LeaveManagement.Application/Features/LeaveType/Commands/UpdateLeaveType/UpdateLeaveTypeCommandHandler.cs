@@ -8,7 +8,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeave
 
 public class UpdateLeaveTypeCommandHandler(
     ILeaveTypeRepository leaveTypeRepository,
-    IManualMapper<UpdateLeaveTypeCommand, Domain.LeaveType> mapper,
+    IUpdateMapper<UpdateLeaveTypeCommand, Domain.LeaveType> mapper,
     IAppLogger<UpdateLeaveTypeCommandHandler> logger) 
     : IRequestHandler<UpdateLeaveTypeCommand, int>
 {
@@ -29,7 +29,7 @@ public class UpdateLeaveTypeCommandHandler(
             throw new NotFoundException(nameof(LeaveType), request.Id);
         }
 
-        var leaveTypeToUpdate = mapper.MapUpdatedRequestToEntity(request, leaveType);
+        var leaveTypeToUpdate = mapper.Map(request, leaveType);
         if (leaveTypeToUpdate == null)
         {
             logger.LogWarning("{LeaveType} - Invalid mapping from request to entity", nameof(LeaveType), request);

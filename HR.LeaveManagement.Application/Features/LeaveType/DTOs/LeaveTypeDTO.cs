@@ -1,4 +1,4 @@
-﻿namespace HR.LeaveManagement.Application.Features.LeaveType.DTO;
+﻿namespace HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
 public class LeaveTypeDTO
 {

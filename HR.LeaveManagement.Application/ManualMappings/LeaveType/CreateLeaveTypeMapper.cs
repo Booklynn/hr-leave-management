@@ -2,9 +2,9 @@
 
 namespace HR.LeaveManagement.Application.ManualMappings.LeaveType;
 
-public class CreateLeaveTypeMapper : IManualMapper<CreateLeaveTypeCommand, Domain.LeaveType>
+public class CreateLeaveTypeMapper : ICreateMapper<CreateLeaveTypeCommand, Domain.LeaveType>
 {
-    public Domain.LeaveType ManualMap(CreateLeaveTypeCommand source)
+    public Domain.LeaveType Map(CreateLeaveTypeCommand source)
     {
         return new Domain.LeaveType
         {

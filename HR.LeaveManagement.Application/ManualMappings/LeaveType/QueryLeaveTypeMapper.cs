@@ -1,10 +1,10 @@
-﻿using HR.LeaveManagement.Application.Features.LeaveType.DTO;
+﻿using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
 namespace HR.LeaveManagement.Application.ManualMappings.LeaveType;
 
-public class LeaveTypeToDtoMapper : IManualMapper<Domain.LeaveType, LeaveTypeDTO>
+public class QueryLeaveTypeMapper : IQueryMapper<Domain.LeaveType, LeaveTypeDTO>
 {
-    public LeaveTypeDTO ManualMap(Domain.LeaveType source)
+    public LeaveTypeDTO Map(Domain.LeaveType source)
     {
         return new LeaveTypeDTO
         {

@@ -10,7 +10,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.Updat
 public class UpdateLeaveAllocationCommandHandler(
     ILeaveTypeRepository leaveTypeRepository,
     ILeaveAllocationRepository leaveAllocationRepository,
-    IManualMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation> mapper,
+    IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation> mapper,
     IAppLogger<UpdateLeaveAllocationCommandHandler> logger,
     IDateTimeProvider dateTimeProvider) : IRequestHandler<UpdateLeaveAllocationCommand, int>
 {
@@ -31,7 +31,7 @@ public class UpdateLeaveAllocationCommandHandler(
             throw new NotFoundException(nameof(LeaveAllocation), request.Id);
         }
 
-        var leaveAllowcationToUpdate = mapper.MapUpdatedRequestToEntity(request, leaveAllowcation);
+        var leaveAllowcationToUpdate = mapper.Map(request, leaveAllowcation);
         if (leaveAllowcationToUpdate == null)
         {
             logger.LogWarning("{LeaveAllocation} - Invalid mapping from request to entity", nameof(LeaveAllocation), request);
