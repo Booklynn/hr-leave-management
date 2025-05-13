@@ -1,6 +1,6 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
-namespace HR.LeaveManagement.Application.ManualMappings.LeaveType;
+namespace HR.LeaveManagement.Application.Mappings.LeaveType;
 
 public class QueryLeaveTypeMapper : IQueryMapper<Domain.LeaveType, LeaveTypeDTO>
 {

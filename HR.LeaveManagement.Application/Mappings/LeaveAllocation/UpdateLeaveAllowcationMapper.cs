@@ -1,6 +1,6 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 
-namespace HR.LeaveManagement.Application.ManualMappings.LeaveAllocation;
+namespace HR.LeaveManagement.Application.Mappings.LeaveAllocation;
 
 public class UpdateLeaveAllowcationMapper : IUpdateMapper<UpdateLeaveAllocationCommand, Domain.LeaveAllocation>
 {

@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
-using HR.LeaveManagement.Application.ManualMappings;
+using HR.LeaveManagement.Application.Mappings;
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 

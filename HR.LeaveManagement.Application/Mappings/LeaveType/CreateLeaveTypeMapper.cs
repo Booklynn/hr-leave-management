@@ -1,6 +1,6 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 
-namespace HR.LeaveManagement.Application.ManualMappings.LeaveType;
+namespace HR.LeaveManagement.Application.Mappings.LeaveType;
 
 public class CreateLeaveTypeMapper : ICreateMapper<CreateLeaveTypeCommand, Domain.LeaveType>
 {
