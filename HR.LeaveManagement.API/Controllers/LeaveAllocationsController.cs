@@ -1,5 +1,10 @@
 ﻿using HR.LeaveManagement.Application.Common;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.CreateLeaveAllocation;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.DeleteLeaveAllocation;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Commands.UpdateLeaveAllocation;
 using HR.LeaveManagement.Application.Features.LeaveAllocation.DTOs;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAllocationDetails;
+using HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetListAllocations;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,34 +16,48 @@ namespace HR.LeaveManagement.API.Controllers
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IReadOnlyList<LeaveAllocationDTO> Get()
+        public async Task<ActionResult<IReadOnlyList<LeaveAllocationDTO>>> Get()
         {
-            return null;
+            return Ok(await dispatcher.Send(new GetLeaveAllocationsQuery()));
         }
 
-        // GET api/<LeaveAllocationsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<LeaveAllocationDetailsDTO>> Get([FromRoute] int id)
         {
-            return "value";
+            return Ok(await dispatcher.Send(new GetLeaveAllocationDetailsQuery(id)));
         }
 
-        // POST api/<LeaveAllocationsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Post([FromBody] CreateLeaveAllocationCommand request)
         {
+            var response = await dispatcher.Send(request);
+            return CreatedAtAction(nameof(Get), new { id = response });
         }
 
-        // PUT api/<LeaveAllocationsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Put([FromRoute] int id, [FromBody] UpdateLeaveAllocationCommand request)
         {
+            await dispatcher.Send(new UpdateLeaveAllocationCommand(id, request.NumberOfDays, request.LeaveTypeId, request.Period));
+            return NoContent();
         }
 
-        // DELETE api/<LeaveAllocationsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Delete(int id)
         {
+            await dispatcher.Send(new DeleteLeaveAllocationCommand(id));
+            return NoContent();
         }
     }
 }

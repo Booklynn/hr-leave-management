@@ -41,6 +41,7 @@ public class LeaveTypesController(IDispatcher dispatcher) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Put([FromRoute] int id, [FromBody] UpdateLeaveTypeCommand request)
     {
         await dispatcher.Send(new UpdateLeaveTypeCommand(id, request.Name, request.DefaultDays));
@@ -51,6 +52,7 @@ public class LeaveTypesController(IDispatcher dispatcher) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Delete([FromRoute] int id)
     {
         await dispatcher.Send(new DeleteLeaveTypeCommand(id));
