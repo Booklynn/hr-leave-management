@@ -3,4 +3,4 @@ using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetListLeaveTypes;
 
-public record GetLeaveTypesQuery : IRequest<List<LeaveTypeDTO>>;
+public record GetLeaveTypesQuery : IRequest<IReadOnlyList<LeaveTypeDTO>>;

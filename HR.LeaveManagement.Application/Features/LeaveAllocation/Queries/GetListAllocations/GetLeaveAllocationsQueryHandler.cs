@@ -10,9 +10,9 @@ public class GetLeaveAllocationsQueryHandler(
     ILeaveAllocationRepository leaveAllocationRepository, 
     IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDTO> mapper,
     IAppLogger<GetLeaveAllocationsQueryHandler> logger) 
-    : IRequestHandler<GetLeaveAllocationsQuery, List<LeaveAllocationDTO>>
+    : IRequestHandler<GetLeaveAllocationsQuery, IReadOnlyList<LeaveAllocationDTO>>
 {
-    public async Task<List<LeaveAllocationDTO>> Handle(GetLeaveAllocationsQuery request)
+    public async Task<IReadOnlyList<LeaveAllocationDTO>> Handle(GetLeaveAllocationsQuery request)
     {
         var leaveAllocations = await leaveAllocationRepository.GetListLeaveAllocationsWithDetails();
         logger.LogInformation("{LeaveAllocation} were retrieved successfully", nameof(LeaveAllocation));

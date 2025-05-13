@@ -15,7 +15,7 @@ public class LeaveTypesController(IDispatcher dispatcher) : ControllerBase
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<LeaveTypeDTO>>> Get()
+    public async Task<ActionResult<IReadOnlyList<LeaveTypeDTO>>> Get()
     {
         return Ok(await dispatcher.Send(new GetLeaveTypesQuery()));
     }

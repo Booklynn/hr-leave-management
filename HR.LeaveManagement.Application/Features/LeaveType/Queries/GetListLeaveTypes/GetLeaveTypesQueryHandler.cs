@@ -10,9 +10,9 @@ public class GetLeaveTypesQueryHandler(
     ILeaveTypeRepository leaveTypeRepository,
     IQueryMapper<Domain.LeaveType, LeaveTypeDTO> mapper,
     IAppLogger<GetLeaveTypesQueryHandler> logger) 
-    : IRequestHandler<GetLeaveTypesQuery, List<LeaveTypeDTO>>
+    : IRequestHandler<GetLeaveTypesQuery, IReadOnlyList<LeaveTypeDTO>>
 {
-    public async Task<List<LeaveTypeDTO>> Handle(GetLeaveTypesQuery request)
+    public async Task<IReadOnlyList<LeaveTypeDTO>> Handle(GetLeaveTypesQuery request)
     {
         var leaveTypes = await leaveTypeRepository.GetListAsync();
         logger.LogInformation("{LeaveType} were retrieved successfully", nameof(LeaveType));
