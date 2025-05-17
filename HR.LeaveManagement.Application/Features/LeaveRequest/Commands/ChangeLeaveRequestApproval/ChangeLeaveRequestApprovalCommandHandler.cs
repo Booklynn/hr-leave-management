@@ -11,8 +11,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequest.Commands.ChangeLe
 
 public class ChangeLeaveRequestApprovalCommandHandler(
     ILeaveTypeRepository leaveTypeRepository, 
-    ILeaveRequestRepository leaveRequestRepository, 
-    IUpdateMapper<ChangeLeaveRequestApprovalCommand, Domain.LeaveRequest> mapper,
+    ILeaveRequestRepository leaveRequestRepository,
     IEmailSender emailSender,
     IAppLogger<ChangeLeaveRequestApprovalCommandHandler> logger) : IRequestHandler<ChangeLeaveRequestApprovalCommand, int>
 {
