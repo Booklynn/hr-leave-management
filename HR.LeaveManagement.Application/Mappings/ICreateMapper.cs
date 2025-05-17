@@ -1,6 +1,8 @@
-﻿namespace HR.LeaveManagement.Application.Mappings;
+﻿using HR.LeaveManagement.Domain.Common;
 
-public interface ICreateMapper<TSource, TDTO> where TSource : class where TDTO : class
+namespace HR.LeaveManagement.Application.Mappings;
+
+public interface ICreateMapper<TSource, TEntity> where TSource : class where TEntity : BaseEntity
 {
-    TDTO Map(TSource source);
+    TEntity Map(TSource source);
 }
