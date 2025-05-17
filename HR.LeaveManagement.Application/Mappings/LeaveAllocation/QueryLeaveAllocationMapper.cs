@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 
 namespace HR.LeaveManagement.Application.Mappings.LeaveAllocation;
 
-public class QueryLeaveAllocationMapper : IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDTO>
+public class QueryLeaveAllocationMapper(IQueryMapper<Domain.LeaveType, LeaveTypeDTO> leaveTypeMapper) : IQueryMapper<Domain.LeaveAllocation, LeaveAllocationDTO>
 {
     public LeaveAllocationDTO Map(Domain.LeaveAllocation source)
     {
@@ -11,19 +11,9 @@ public class QueryLeaveAllocationMapper : IQueryMapper<Domain.LeaveAllocation, L
         {
             Id = source.Id,
             NumberOfDays = source.NumberOfDays,
-            LeaveType = source.LeaveType != null ? MapLeaveTypeToDTO(source.LeaveType) : null,
+            LeaveType = source.LeaveType != null ? leaveTypeMapper.Map(source.LeaveType) : null,
             LeaveTypeId = source.LeaveTypeId,
             Period = source.Period,
-        };
-    }
-
-    private static LeaveTypeDTO MapLeaveTypeToDTO(Domain.LeaveType source)
-    {
-        return new LeaveTypeDTO
-        {
-            Id = source.Id,
-            Name = source.Name,
-            DefaultDays = source.DefaultDays
         };
     }
 }
