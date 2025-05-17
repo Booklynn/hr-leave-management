@@ -21,13 +21,13 @@ public static class PersistenceServiceRegistration
                     options.UseSqlServer(configuration.GetConnectionString("HrDatabaseConnectionString"));
                     break;
 
-                /*case "sqlite":
+/*                case "sqlite":
                     options.UseSqlite(config.GetConnectionString("HrDatabaseSqliteConnectionString"));
-                    break;
+                    break;*/
 
                 case "inmemory":
                     options.UseInMemoryDatabase("TestDb");
-                    break;*/
+                    break;
 
                 default:
                     throw new InvalidOperationException($"Unsupported provider: {provider}");
