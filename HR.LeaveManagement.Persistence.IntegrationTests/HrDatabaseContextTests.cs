@@ -1,0 +1,47 @@
+﻿using HR.LeaveManagement.Domain;
+using HR.LeaveManagement.Persistence.DatabaseContext;
+using Shouldly;
+
+namespace HR.LeaveManagement.Persistence.IntegrationTests;
+
+public class HrDatabaseContextTests
+{
+    private readonly HrDatabaseContext _hrDatabaseContext;
+
+    public HrDatabaseContextTests()
+    {
+        _hrDatabaseContext = HrDbContextTestFactory.Create();
+    }
+
+    [Fact]
+    public async Task SaveChangesAsync_SetDateCreatedAsync()
+    {
+        var leaveType = new LeaveType
+        {
+            Id = 1,
+            Name = "Test Vacation Leave",
+            DefaultDays = 7
+        };
+
+        await _hrDatabaseContext.LeaveTypes.AddAsync(leaveType);
+        await _hrDatabaseContext.SaveChangesAsync();
+
+        leaveType.DateCreated.ShouldNotBeNull();
+    }
+
+    [Fact]
+    public async Task SaveChangesAsync_SetDateModified()
+    {
+        var leaveType = new LeaveType
+        {
+            Id = 1,
+            Name = "Test Vacation Leave",
+            DefaultDays = 7
+        };
+
+        await _hrDatabaseContext.LeaveTypes.AddAsync(leaveType);
+        await _hrDatabaseContext.SaveChangesAsync();
+
+        leaveType.DateModified.ShouldNotBeNull();
+    }
+}
