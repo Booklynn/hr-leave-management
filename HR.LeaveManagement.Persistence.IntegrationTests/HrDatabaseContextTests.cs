@@ -14,7 +14,7 @@ public class HrDatabaseContextTests
     }
 
     [Fact]
-    public async Task SaveChangesAsync_SetDateCreatedAsync()
+    public async Task SaveChangesAsync_SetDateCreated()
     {
         var leaveType = new LeaveType
         {
