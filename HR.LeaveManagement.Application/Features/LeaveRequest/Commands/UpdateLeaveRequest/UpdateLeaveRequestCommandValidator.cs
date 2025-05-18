@@ -16,8 +16,8 @@ public class UpdateLeaveRequestCommandValidator : AbstractValidator<UpdateLeaveR
         Include(new BaseLeaveRequestValidator(_leaveTypeRepository));
 
         RuleFor(request => request.Id)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage("{PropertyName} is required.")
-            .NotNull().WithMessage("{PropertyName} is required.")
             .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
             .MustAsync(LeaveRequestExists).WithMessage("Leave type does not exist.");
     }

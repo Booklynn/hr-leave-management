@@ -21,23 +21,27 @@ public class UpdateLeaveAllocationCommandValidator : AbstractValidator<UpdateLea
 
         RuleFor(request => request.Id)
             .NotEmpty().WithMessage("{PropertyName} is required.")
-            .NotNull().WithMessage("{PropertyName} is required.")
-            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
-            .MustAsync(LeaveAllocationExists).WithMessage("Leave type does not exist.");
+            .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.");
+
+        RuleFor(request => request.Id)
+            .MustAsync(LeaveAllocationExists)
+            .WithMessage("Leave type does not exist.")
+            .When(request => request.Id > 0);
 
         RuleFor(request => request.NumberOfDays)
-            .NotNull().WithMessage("{PropertyName} is required.")
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.");
 
         RuleFor(request => request.LeaveTypeId)
             .NotEmpty().WithMessage("{PropertyName} is required.")
-            .NotNull().WithMessage("{PropertyName} is required.")
             .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
             .MustAsync(LeaveTypeExists).WithMessage("Leave type does not exist.");
 
+        RuleFor(request => request.LeaveTypeId)
+            .MustAsync(LeaveTypeExists).WithMessage("Leave type does not exist.")
+            .When(request => request.LeaveTypeId > 0);
+
         RuleFor(request => request.Period)
-            .NotNull().WithMessage("{PropertyName} is required")
             .NotEmpty().WithMessage("{PropertyName} is required")
             .GreaterThanOrEqualTo(_dateTimeProvider.Now.Year).WithMessage("{PropertyName} must be after {ComparisonValue}.");
     }

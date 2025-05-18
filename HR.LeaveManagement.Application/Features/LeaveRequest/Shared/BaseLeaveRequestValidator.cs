@@ -13,18 +13,16 @@ public class BaseLeaveRequestValidator : AbstractValidator<BaseLeaveRequest>
         _leaveTypeRepository = leaveTypeRepository;
 
         RuleFor(request => request.LeaveTypeId)
-            .NotNull().WithMessage("{PropertyName} is required")
+            .Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage("{PropertyName} is required")
             .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}.")
             .MustAsync(LeaveTypeExists).WithMessage("Leave type does not exist");
 
         RuleFor(request => request.StartDate)
-            .NotNull().WithMessage("{PropertyName} is required")
             .NotEmpty().WithMessage("{PropertyName} is required")
             .LessThan(request => request.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}.");
 
         RuleFor(request => request.EndDate)
-            .NotNull().WithMessage("{PropertyName} is required")
             .NotEmpty().WithMessage("{PropertyName} is required")
             .GreaterThan(request => request.StartDate).WithMessage("{PropertyName} must be after {ComparisonValue}.");
     }

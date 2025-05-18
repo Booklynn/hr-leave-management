@@ -8,11 +8,9 @@ public class ChangeLeaveRequestApprovalCommandValidator : AbstractValidator<Chan
     {
 
         RuleFor(request => request.Id)
-            .NotEmpty().WithMessage("{PropertyName} is required.")
-            .NotNull().WithMessage("{PropertyName} is required.");
+            .NotEmpty().WithMessage("{PropertyName} is required.");
 
         RuleFor(request => request.Approved)
-            .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} is required.");
     }
 }
