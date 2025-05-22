@@ -12,4 +12,8 @@
     <ProjectReference Include="..\HR.LeaveManagement.Persistence\HR.LeaveManagement.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\datatables-bs5\" />
+  </ItemGroup>
+
 </Project>

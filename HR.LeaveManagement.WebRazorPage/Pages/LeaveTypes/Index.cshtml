@@ -2,6 +2,7 @@
 @model HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes.IndexModel
 @{
     ViewData["Title"] = "Leave Types";
+    var rowIdex = 1;
 }
 
 <h1>Leave Types</h1>
@@ -9,6 +10,7 @@
 <div class="m-2 d-flex justify-content-end">
     <button class="btn btn-success">Add Leave Type</button>
 </div>
+<br />
 
 @if (Model.LeaveTypes == null)
 {
@@ -16,29 +18,31 @@
 }
 else
 {
-    <table class="table">
+    <table id="leaveType-table" class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Default Days</th>
-                <th>Actions</th>
+                <th class="text-center" scope="col">#</th>
+                <th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Default Days</th>
+                <th class="text-center" scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var leaveType in Model.LeaveTypes)
             {
                 <tr id="leaveType-@leaveType.Id">
-                    <td>@leaveType.Id</td>
+                    <th class="text-center" scope="row">@rowIdex</th>
                     <td>@leaveType.Name</td>
-                    <td>@leaveType.DefaultDays</td>
-                    <td>
+                    <td class="text-center" text-center">@leaveType.DefaultDays</td>
+                    <td class="text-center">
                         <button class="btn btn-dark">Allocate Leave</button>
                         <button class="btn btn-warning">Edit</button>
                         <a asp-page="Details" asp-route-id="@leaveType.Id" class="btn btn-info">Details</a>
                         <button data-id="@leaveType.Id" class="btn btn-danger deleteBtn">Delete</button>
                     </td>
                 </tr>
+
+                rowIdex++;
             }
         </tbody>
     </table>
@@ -51,6 +55,8 @@ else
 @section Scripts {
     <script>
         $(function () {
+            const table = $('#leaveType-table').DataTable();
+            
             $('.deleteBtn').click(function (event) {
                 event.preventDefault();
 
@@ -80,12 +86,14 @@ else
                         .then(data => {
                             if (data.success)
                             {
+                                const row = $('#leaveType-' + id);
+                                table.row(row).remove().draw();
+
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: "Your item has been deleted.",
                                     icon: "success"
                                 });
-                                $('#leaveType-' + id).remove();
                             } else {
                                 Swal.fire({
                                     title: "Error!",
