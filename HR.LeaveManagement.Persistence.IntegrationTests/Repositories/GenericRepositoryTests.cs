@@ -1,7 +1,6 @@
 ﻿using HR.LeaveManagement.Domain;
 using HR.LeaveManagement.Persistence.DatabaseContext;
 using HR.LeaveManagement.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Shouldly;
 
 namespace HR.LeaveManagement.Persistence.IntegrationTests.Repositories;
