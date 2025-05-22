@@ -1,0 +1,26 @@
+﻿@page "/leave-types/details/{id:int}"
+@model HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes.DetailsModel
+@{
+    ViewData["Title"] = "Leave Type Details";
+}
+
+<h1>Leave Type Details</h1>
+
+@if (Model.LeaveTypeDetails != null)
+{
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">@Model.LeaveTypeDetails.Id</dd>
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">@Model.LeaveTypeDetails.Name</dd>
+        <dt class="col-sm-3">Default Days</dt>
+        <dd class="col-sm-9">@Model.LeaveTypeDetails.DefaultDays</dd>
+        <dt class="col-sm-3">Date Created</dt>
+        <dd class="col-sm-9">@Model.LeaveTypeDetails.DateCreated</dd>
+        <dt class="col-sm-3">Date DateModified</dt>
+        <dd class="col-sm-9">@Model.LeaveTypeDetails.DateModified</dd>
+    </dl>
+}
+
+<a asp-page="Index" class="btn btn-dark">Back</a>
