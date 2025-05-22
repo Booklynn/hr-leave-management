@@ -1,0 +1,42 @@
+﻿@page "/leave-types/edit/{id:int}"
+@model HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes.EditModel
+@{
+    ViewData["Title"] = "Edit Leave Type";
+
+}
+
+<h1>Edit Leave Type</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3 form-group">
+                <label asp-for="@Model.Command.Name" class="form-label"></label>
+                <input asp-for="@Model.Command.Name" class="form-control" maxlength="70" value="@Model.LeaveTypeDetails?.Name" />
+                <span asp-validation-for="@Model.Command.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-group">
+                <label asp-for="@Model.Command.DefaultDays" class="form-label">Default Days</label>
+                <input asp-for="@Model.Command.DefaultDays" class="form-control" type="number" min="1" max="100" value="@Model.LeaveTypeDetails?.DefaultDays" />
+                <span asp-validation-for="@Model.Command.DefaultDays" class="text-danger mt-1"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            @if (@Model.IsFromDetailPage)
+            {
+                <a asp-page="Details" asp-route-id="@Model.LeaveTypeDetails?.Id" class="btn btn-dark">Back</a>
+            }
+            else
+            {
+                <a asp-page="Index" class="btn btn-dark">Back</a>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

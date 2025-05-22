@@ -1,0 +1,34 @@
+﻿@page "/leave-types/create"
+@model HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes.CreateModel
+@{
+    ViewData["Title"] = "Create Leave Type";
+}
+
+<h1>Create Leave Type</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3 form-group">
+                <label asp-for="@Model.Command.Name" class="form-label"></label>
+                <input asp-for="@Model.Command.Name" class="form-control" maxlength="70" />
+                <span asp-validation-for="@Model.Command.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-group">
+                <label asp-for="@Model.Command.DefaultDays" class="form-label">Default Days</label>
+                <input asp-for="@Model.Command.DefaultDays" class="form-control" type="number" min="1" max="100" />
+                <span asp-validation-for="@Model.Command.DefaultDays" class="text-danger mt-1"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-page="Index" class="btn btn-dark">Back</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

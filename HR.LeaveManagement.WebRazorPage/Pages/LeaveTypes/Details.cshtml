@@ -21,4 +21,7 @@
     </dl>
 }
 
-<a asp-page="Index" class="btn btn-dark">Back</a>
+<div>
+    <a asp-page="Edit" asp-route-id="@Model.LeaveTypeDetails?.Id" asp-route-isFromDetailPage="true" class="btn btn-warning">Edit</a>
+    <a asp-page="Index" class="btn btn-dark">Back</a>
+</div>

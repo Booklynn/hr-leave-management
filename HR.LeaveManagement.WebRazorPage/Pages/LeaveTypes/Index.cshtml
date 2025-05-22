@@ -2,13 +2,12 @@
 @model HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes.IndexModel
 @{
     ViewData["Title"] = "Leave Types";
-    var rowIdex = 1;
 }
 
 <h1>Leave Types</h1>
-
+<hr />
 <div class="m-2 d-flex justify-content-end">
-    <button class="btn btn-success">Add Leave Type</button>
+    <a asp-page="Create" class="btn btn-success">Add Leave Type</a>
 </div>
 <br />
 
@@ -21,7 +20,6 @@ else
     <table id="leaveType-table" class="table table-striped">
         <thead>
             <tr>
-                <th class="text-center" scope="col">#</th>
                 <th class="text-center" scope="col">Name</th>
                 <th class="text-center" scope="col">Default Days</th>
                 <th class="text-center" scope="col">Actions</th>
@@ -31,18 +29,15 @@ else
             @foreach (var leaveType in Model.LeaveTypes)
             {
                 <tr id="leaveType-@leaveType.Id">
-                    <th class="text-center" scope="row">@rowIdex</th>
                     <td>@leaveType.Name</td>
                     <td class="text-center" text-center">@leaveType.DefaultDays</td>
                     <td class="text-center">
                         <button class="btn btn-dark">Allocate Leave</button>
-                        <button class="btn btn-warning">Edit</button>
+                        <a asp-page="Edit" asp-route-id="@leaveType.Id" class="btn btn-warning">Edit</a>
                         <a asp-page="Details" asp-route-id="@leaveType.Id" class="btn btn-info">Details</a>
                         <button data-id="@leaveType.Id" class="btn btn-danger deleteBtn">Delete</button>
                     </td>
                 </tr>
-
-                rowIdex++;
             }
         </tbody>
     </table>
@@ -55,9 +50,14 @@ else
 @section Scripts {
     <script>
         $(function () {
-            const table = $('#leaveType-table').DataTable();
-            
-            $('.deleteBtn').click(function (event) {
+            const table = $('#leaveType-table').DataTable({
+                columnDefs: [
+                    { targets: -1, orderable: false, searchable: false }
+                ],
+                order: []
+            });
+
+            $(document).on('click', '.deleteBtn', function (event) {
                 event.preventDefault();
 
                 const btn = $(this);

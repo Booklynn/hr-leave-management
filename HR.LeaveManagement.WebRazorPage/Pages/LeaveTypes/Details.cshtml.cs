@@ -3,6 +3,7 @@ using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NotFoundException = HR.LeaveManagement.Application.Exceptions.NotFoundException;
 
 namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes
 {
@@ -10,9 +11,18 @@ namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes
     {
         public LeaveTypeDetailsDTO? LeaveTypeDetails { get; private set; }
 
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            LeaveTypeDetails = await dispatcher.Send(new GetLeaveTypeDetailsQuery(id));
+            try
+            {
+                LeaveTypeDetails = await dispatcher.Send(new GetLeaveTypeDetailsQuery(id));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
     }
-}
+}       
