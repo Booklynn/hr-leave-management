@@ -22,7 +22,6 @@ public class GetLeaveTypeDetailsQueryHandler(
             throw new NotFoundException(nameof(LeaveType), request.Id);
         }
 
-        logger.LogInformation("{@LeaveType} - {@Id} was retrieved successfully", nameof(LeaveType), leaveType.Id);
         return mapper.Map(leaveType);
     }
 }
