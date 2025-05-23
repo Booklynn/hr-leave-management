@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence.Repositories;
 
-public class LeaveRequestRepository(HrDatabaseContext context) : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
+public class LeaveRequestRepository(BaseHrDatabaseContext context) : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
 {
     public async Task<IReadOnlyList<LeaveRequest>> GetListLeaveRequestsWithDetails()
     {

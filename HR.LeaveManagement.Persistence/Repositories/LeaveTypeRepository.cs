@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence.Repositories;
 
-public class LeaveTypeRepository(HrDatabaseContext context) : GenericRepository<LeaveType>(context), ILeaveTypeRepository
+public class LeaveTypeRepository(BaseHrDatabaseContext context) : GenericRepository<LeaveType>(context), ILeaveTypeRepository
 {
     public async Task<bool> DoesLeaveTypeExist(int id)
     {

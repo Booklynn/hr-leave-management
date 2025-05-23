@@ -7,7 +7,7 @@ namespace HR.LeaveManagement.Persistence.IntegrationTests.Repositories;
 
 public class GenericRepositoryTests
 {
-    private readonly HrDatabaseContext _hrDatabaseContext;
+    private readonly BaseHrDatabaseContext _hrDatabaseContext;
     private readonly GenericRepository<LeaveType> _genericRepository;
 
     public GenericRepositoryTests()

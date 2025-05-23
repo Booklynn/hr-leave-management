@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence.DatabaseContext;
 
-public class HrDatabaseContext(DbContextOptions<HrDatabaseContext> options) : DbContext(options)
+public class BaseHrDatabaseContext(DbContextOptions<BaseHrDatabaseContext> options) : DbContext(options)
 {
     public DbSet<LeaveType> LeaveTypes { get; set; }
     public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
@@ -12,7 +12,7 @@ public class HrDatabaseContext(DbContextOptions<HrDatabaseContext> options) : Db
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(HrDatabaseContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseHrDatabaseContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 

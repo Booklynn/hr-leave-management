@@ -6,7 +6,7 @@ namespace HR.LeaveManagement.Persistence.IntegrationTests;
 
 public class HrDatabaseContextTests
 {
-    private readonly HrDatabaseContext _hrDatabaseContext;
+    private readonly BaseHrDatabaseContext _hrDatabaseContext;
 
     public HrDatabaseContextTests()
     {

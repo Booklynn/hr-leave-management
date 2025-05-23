@@ -13,20 +13,22 @@ public static class PersistenceServiceRegistration
     {
         var provider = configuration.GetValue<string>("DbProvider");
 
-        services.AddDbContext<HrDatabaseContext>(options =>
+        switch (provider?.ToLowerInvariant())
         {
-            switch (provider?.ToLowerInvariant())
-            {
-                case "sqlserver":
-                    options.UseSqlServer(configuration.GetConnectionString("HrDatabaseConnectionString"));
-                    break;
+            case "sqlserver":
+                services.AddDbContext<BaseHrDatabaseContext>(options =>
+                    options.UseSqlServer(configuration.GetConnectionString("HrDatabaseConnectionString")));
+                break;
 
-                default:
-                    throw new InvalidOperationException($"Unsupported provider: {provider}");
-            }
-            ;
-        });
-       
+            case "sqlite":
+                services.AddDbContext<BaseHrDatabaseContext>(options =>
+                    options.UseSqlite(configuration.GetConnectionString("HrDatabaseConnectionString")));
+                break;
+
+            default:
+                throw new InvalidOperationException($"Unsupported provider: {provider}");
+        }
+        
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
         services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();

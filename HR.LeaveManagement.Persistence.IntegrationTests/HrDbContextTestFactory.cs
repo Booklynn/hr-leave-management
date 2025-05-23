@@ -5,12 +5,12 @@ namespace HR.LeaveManagement.Persistence.IntegrationTests;
 
 public static class HrDbContextTestFactory
 {
-    public static HrDatabaseContext Create()
+    public static BaseHrDatabaseContext Create()
     {
-        var dbOptions = new DbContextOptionsBuilder<HrDatabaseContext>()
+        var dbOptions = new DbContextOptionsBuilder<BaseHrDatabaseContext>()
            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        return new HrDatabaseContext(dbOptions);
+        return new BaseHrDatabaseContext(dbOptions);
     }
 }

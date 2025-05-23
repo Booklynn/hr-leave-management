@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HR.LeaveManagement.Persistence.Migrations
+namespace HR.LeaveManagement.Persistence.Migrations.Sqlite
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -15,12 +15,12 @@ namespace HR.LeaveManagement.Persistence.Migrations
                 name: "LeaveTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    DefaultDays = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 70, nullable: false),
+                    DefaultDays = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,14 +31,14 @@ namespace HR.LeaveManagement.Persistence.Migrations
                 name: "LeaveAllocations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumberOfDays = table.Column<int>(type: "int", nullable: false),
-                    LeaveTypeId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Period = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NumberOfDays = table.Column<int>(type: "INTEGER", nullable: false),
+                    LeaveTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EmployeeId = table.Column<string>(type: "TEXT", nullable: false),
+                    Period = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,18 +55,19 @@ namespace HR.LeaveManagement.Persistence.Migrations
                 name: "LeaveRequests",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LeaveTypeId = table.Column<int>(type: "int", nullable: false),
-                    DateRequested = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestComments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Approved = table.Column<bool>(type: "bit", nullable: true),
-                    Cancelled = table.Column<bool>(type: "bit", nullable: false),
-                    RequestingEmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LeaveTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateRequested = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    RequestComments = table.Column<string>(type: "TEXT", nullable: true),
+                    Approved = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Cancelled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequestingEmployeeId = table.Column<string>(type: "TEXT", nullable: false),
+                    DateActioned = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

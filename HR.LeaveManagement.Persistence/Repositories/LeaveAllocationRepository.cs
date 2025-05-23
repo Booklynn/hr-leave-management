@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence.Repositories;
 
-public class LeaveAllocationRepository(HrDatabaseContext context) : GenericRepository<LeaveAllocation>(context), ILeaveAllocationRepository
+public class LeaveAllocationRepository(BaseHrDatabaseContext context) : GenericRepository<LeaveAllocation>(context), ILeaveAllocationRepository
 {
     public async Task AddAllocations(IReadOnlyList<LeaveAllocation> allocations)
     {
