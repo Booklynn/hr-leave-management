@@ -20,12 +20,14 @@ public class UpdateLeaveTypeCommandValidator : AbstractValidator<UpdateLeaveType
         RuleFor(request => request.Name)
             .Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage("{PropertyName} is required.")
-            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than {MaxLength} characters.")
-            .MustAsync(LeaveTypeNameUnique).WithMessage("Leave type already exists.");
+            .MaximumLength(70).WithMessage("{PropertyName} must be fewer than {MaxLength} characters.");
 
         RuleFor(request => request.DefaultDays)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .InclusiveBetween(1, 100).WithMessage("{PropertyName} must be between {From} and {To}.");
+
+        RuleFor(request => request)
+            .MustAsync(LeaveTypeNameUnique).WithMessage("Leave type already exists.");
     }
 
     private async Task<bool> LeaveTypeExists(int id, CancellationToken token)
@@ -33,8 +35,8 @@ public class UpdateLeaveTypeCommandValidator : AbstractValidator<UpdateLeaveType
         return await _leaveTypeRepository.DoesLeaveTypeExist(id);
     }
 
-    private async Task<bool> LeaveTypeNameUnique(string name, CancellationToken token)
+    private async Task<bool> LeaveTypeNameUnique(UpdateLeaveTypeCommand command, CancellationToken token)
     {
-        return await _leaveTypeRepository.IsLeaveTypeUnique(name);
+        return await _leaveTypeRepository.IsLeaveTypeUnique(command.Id, command.Name);
     }
 }

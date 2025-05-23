@@ -20,4 +20,11 @@ public class LeaveTypeRepository(HrDatabaseContext context) : GenericRepository<
             .AsNoTracking()
             .AnyAsync(query => query.Name == name);
     }
+
+    public async Task<bool> IsLeaveTypeUnique(int id, string name)
+    {
+        return !await _context.LeaveTypes
+            .AsNoTracking()
+            .AnyAsync(lt => lt.Name == name && lt.Id != id);
+    }
 }
