@@ -6,40 +6,39 @@ using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDeta
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes
+namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes;
+
+[ValidateAntiForgeryToken]
+public class EditModel(IDispatcher dispatcher) : PageModel
 {
-    public class EditModel(IDispatcher dispatcher) : PageModel
+    [BindProperty]
+    public required UpdateLeaveTypeCommand Command { get; set; }
+
+    public LeaveTypeDetailsDTO? LeaveTypeDetails { get; private set; }
+
+    public bool IsFromDetailPage { get; private set; } = false;
+
+    public async Task<IActionResult> OnGetAsync(int id, bool isFromDetailPage = false)
     {
-        [BindProperty]
-        public required UpdateLeaveTypeCommand Command { get; set; }
-
-        public LeaveTypeDetailsDTO? LeaveTypeDetails { get; private set; }
-
-        [BindProperty(SupportsGet = true)]
-        public bool IsFromDetailPage { get; private set; } = false;
-
-        public async Task<IActionResult> OnGetAsync(int id, bool isFromDetailPage = false)
+        try
         {
-            try
-            {
-                IsFromDetailPage = isFromDetailPage;
-                LeaveTypeDetails = await dispatcher.Send(new GetLeaveTypeDetailsQuery(id));
-            }
-            catch (NotFoundException)
-            {
-                return NotFound();
-            }
+            IsFromDetailPage = isFromDetailPage;
+            LeaveTypeDetails = await dispatcher.Send(new GetLeaveTypeDetailsQuery(id));
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
 
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(int id)
+    {
+        if (!ModelState.IsValid)
             return Page();
-        }
 
-        public async Task<IActionResult> OnPostAsync(int id)
-        {
-            if (!ModelState.IsValid)
-                return Page();
-
-            await dispatcher.Send(new UpdateLeaveTypeCommand(id, Command.Name, Command.DefaultDays));
-            return RedirectToPage("Index");
-        }
+        await dispatcher.Send(new UpdateLeaveTypeCommand(id, Command.Name, Command.DefaultDays));
+        return RedirectToPage("Index");
     }
 }

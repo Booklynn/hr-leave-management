@@ -74,7 +74,7 @@ else
                     confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        fetch('?handler=Delete', {
+                        fetch('/leave-types/delete', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -86,8 +86,8 @@ else
                         .then(data => {
                             if (data.success)
                             {
-                                const row = $('#leaveType-' + id);
-                                table.row(row).remove().draw();
+                                const rowToDelete = $('#leaveType-' + data.id);
+                                table.row(rowToDelete).remove().draw();
 
                                 Swal.fire({
                                     title: "Deleted!",
