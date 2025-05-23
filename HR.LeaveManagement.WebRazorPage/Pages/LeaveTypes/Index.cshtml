@@ -113,5 +113,23 @@ else
                 });
             });
         });
+
+        $(function() {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: successMessage,
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'small-swal'
+                    }
+                });
+            }
+        });
     </script>
 }

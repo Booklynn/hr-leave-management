@@ -16,7 +16,8 @@ public class EditModel(IDispatcher dispatcher) : PageModel
 
     public LeaveTypeDetailsDTO? LeaveTypeDetails { get; private set; }
 
-    public bool IsFromDetailPage { get; private set; } = false;
+    [BindProperty]
+    public bool IsFromDetailPage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id, bool isFromDetailPage = false)
     {
@@ -24,13 +25,12 @@ public class EditModel(IDispatcher dispatcher) : PageModel
         {
             IsFromDetailPage = isFromDetailPage;
             LeaveTypeDetails = await dispatcher.Send(new GetLeaveTypeDetailsQuery(id));
+            return Page();
         }
         catch (NotFoundException)
         {
             return NotFound();
         }
-
-        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(int id)
@@ -39,6 +39,13 @@ public class EditModel(IDispatcher dispatcher) : PageModel
             return Page();
 
         await dispatcher.Send(new UpdateLeaveTypeCommand(id, Command.Name, Command.DefaultDays));
+        
+        TempData["SuccessMessage"] = $"Leave type \"{Command.Name}\" updated successfully!";
+        
+        if (IsFromDetailPage)
+        {
+            return RedirectToPage("/LeaveTypes/Details", new { id });
+        }
         return RedirectToPage("Index");
     }
 }
