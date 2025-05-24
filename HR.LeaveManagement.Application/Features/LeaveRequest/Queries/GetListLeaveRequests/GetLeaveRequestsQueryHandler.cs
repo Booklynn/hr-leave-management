@@ -8,8 +8,8 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetListLe
 
 public class GetLeaveRequestsQueryHandler(
     ILeaveRequestRepository leaveRequestRepository,
-    IQueryMapper<Domain.LeaveRequest, LeaveRequestDTO> mapper,
-    IAppLogger<GetLeaveRequestsQueryHandler> logger) : IRequestHandler<GetLeaveRequestsQuery, IReadOnlyList<LeaveRequestDTO>>
+    IQueryMapper<Domain.LeaveRequest, LeaveRequestDTO> mapper) 
+    : IRequestHandler<GetLeaveRequestsQuery, IReadOnlyList<LeaveRequestDTO>>
 {
     public async Task<IReadOnlyList<LeaveRequestDTO>> Handle(GetLeaveRequestsQuery request)
     {
