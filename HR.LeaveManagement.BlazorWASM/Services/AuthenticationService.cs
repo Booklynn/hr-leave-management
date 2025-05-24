@@ -27,7 +27,7 @@ public class AuthenticationService(
                 return false;
             }
 
-            await localStorageService.SetItemAsync("Token", authenticationResponse.ToString);
+            await localStorageService.SetItemAsync("Token", authenticationResponse.Token);
             await ((APIAuthenticationStateProvider)authenticationStateProvider).LoggedIn();
 
             return true;
