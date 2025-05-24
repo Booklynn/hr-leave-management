@@ -1,15 +1,20 @@
-﻿using HR.LeaveManagement.BlazorWASM.Contracts;
+﻿using Blazored.LocalStorage;
+using HR.LeaveManagement.BlazorWASM.Contracts;
 using HR.LeaveManagement.BlazorWASM.Models.LeaveTypes;
 using HR.LeaveManagement.BlazorWASM.Services.Base;
 
 namespace HR.LeaveManagement.BlazorWASM.Services;
 
-public class LeaveTypeService(IClient client) : BaseHttpService(client), ILeaveTypeService
+public class LeaveTypeService(
+    IClient client, 
+    ILocalStorageService localStorageService) 
+    : BaseHttpService(client, localStorageService), ILeaveTypeService
 {
     public async Task<Response<Guid>> CreateLeaveType(LeaveTypeViewModel leaveType)
     {
         try
         {
+            await AddBearerToken();
             var request = new CreateLeaveTypeCommand
             {
                 Name = leaveType.Name,
@@ -32,6 +37,7 @@ public class LeaveTypeService(IClient client) : BaseHttpService(client), ILeaveT
     {
         try
         {
+            await AddBearerToken();
             await _client.LeaveTypesDELETEAsync(id);
             return new Response<Guid>
             {
@@ -46,6 +52,7 @@ public class LeaveTypeService(IClient client) : BaseHttpService(client), ILeaveT
 
     public async Task<LeaveTypeViewModel> GetLeaveTypeDetails(int id)
     {
+        await AddBearerToken();
         var leaveType = await _client.LeaveTypesGETAsync(id);
         return new LeaveTypeViewModel
         {
@@ -57,6 +64,7 @@ public class LeaveTypeService(IClient client) : BaseHttpService(client), ILeaveT
 
     public async Task<IReadOnlyList<LeaveTypeViewModel>> GetLeaveTypes()
     {
+        await AddBearerToken();
         var leaveTypes = await _client.LeaveTypesAllAsync();
 
         return leaveTypes?.Select(source => new LeaveTypeViewModel
@@ -71,6 +79,7 @@ public class LeaveTypeService(IClient client) : BaseHttpService(client), ILeaveT
     {
         try
         {
+            await AddBearerToken();
             var request = new UpdateLeaveTypeCommand
             {
                 Name = leaveType.Name,

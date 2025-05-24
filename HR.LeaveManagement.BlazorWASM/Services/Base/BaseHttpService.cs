@@ -1,10 +1,13 @@
-﻿using System.Net;
+﻿using Blazored.LocalStorage;
+using System.Net;
+using System.Net.Http.Headers;
 
 namespace HR.LeaveManagement.BlazorWASM.Services.Base;
 
-public class BaseHttpService(IClient client)
+public class BaseHttpService(IClient client, ILocalStorageService localStorageService)
 {
     protected IClient _client = client;
+    protected readonly ILocalStorageService localStorageService;
 
     protected static Response<Guid> ConvertAPIExceptions<Guid>(ApiException ex)
     {
@@ -32,5 +35,11 @@ public class BaseHttpService(IClient client)
             Message = "Something went wrong, please try again.",
             Success = false
         };
-    }    
+    }
+
+    protected async Task AddBearerToken()
+    {
+        if (await localStorageService.ContainKeyAsync("Token"))
+            _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await localStorageService.GetItemAsync<string>("Token"));
+    }
 }
