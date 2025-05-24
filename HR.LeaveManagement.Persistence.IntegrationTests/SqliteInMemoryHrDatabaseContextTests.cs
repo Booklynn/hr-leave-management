@@ -1,9 +1,10 @@
 ﻿using HR.LeaveManagement.Domain;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 
 namespace HR.LeaveManagement.Persistence.IntegrationTests;
 
-public class SqliteInMemoryHrDatabaseContextTests : IDisposable
+public class SqliteInMemoryHrDatabaseContextTests
 {
     private readonly SqliteInMemoryHrDatabaseContextFactory _testFactory;
 
@@ -12,9 +13,15 @@ public class SqliteInMemoryHrDatabaseContextTests : IDisposable
         _testFactory = new SqliteInMemoryHrDatabaseContextFactory();
     }
 
-    public void Dispose()
+    [Fact]
+    public async Task InitDatabase_EnsureHaveData()
     {
-        _testFactory.Dispose();
+        var leaveType = await _testFactory.Context.LeaveTypes.ToArrayAsync();
+
+        leaveType.ShouldNotBeNull();
+        leaveType.ShouldNotBeEmpty();
+
+        _testFactory.CloseConnection();
     }
 
     [Fact]
@@ -30,6 +37,8 @@ public class SqliteInMemoryHrDatabaseContextTests : IDisposable
         await _testFactory.Context.SaveChangesAsync();
 
         leaveType.DateCreated.ShouldNotBeNull();
+
+        _testFactory.CloseConnection();
     }
 
     [Fact]
@@ -45,6 +54,8 @@ public class SqliteInMemoryHrDatabaseContextTests : IDisposable
         await _testFactory.Context.SaveChangesAsync();
 
         leaveType.DateModified.ShouldNotBeNull();
+
+        _testFactory.CloseConnection();
     }
 
     [Fact]
@@ -60,5 +71,7 @@ public class SqliteInMemoryHrDatabaseContextTests : IDisposable
         await _testFactory.Context.SaveChangesAsync();
 
         leaveType.Id.ShouldBe(2);
+
+        _testFactory.CloseConnection();
     }
 }

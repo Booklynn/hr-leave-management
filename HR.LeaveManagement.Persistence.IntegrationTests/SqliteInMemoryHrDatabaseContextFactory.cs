@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence.IntegrationTests;
 
-public class SqliteInMemoryHrDatabaseContextFactory : IDisposable
+public class SqliteInMemoryHrDatabaseContextFactory
 {
     private readonly SqliteConnection _connection;
     public BaseHrDatabaseContext Context { get; }
@@ -22,9 +22,5 @@ public class SqliteInMemoryHrDatabaseContextFactory : IDisposable
         Context.Database.EnsureCreated();
     }
 
-    public void Dispose()
-    {
-        Context?.Dispose();
-        _connection?.Dispose();
-    }
+    public void CloseConnection () => _connection.Close();
 }
