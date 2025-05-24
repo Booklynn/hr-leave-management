@@ -12,7 +12,7 @@ public class GenericRepositoryTests
 
     public GenericRepositoryTests()
     {
-        _hrDatabaseContext = HrDbContextTestFactory.Create();
+        _hrDatabaseContext = InMemoryHrDatabaseContextFactory.Create();
         _genericRepository = new GenericRepository<LeaveType>(_hrDatabaseContext);
     }
 

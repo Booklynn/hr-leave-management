@@ -4,13 +4,13 @@ using Shouldly;
 
 namespace HR.LeaveManagement.Persistence.IntegrationTests;
 
-public class HrDatabaseContextTests
+public class InMemoryHrDatabaseContextTests
 {
     private readonly BaseHrDatabaseContext _hrDatabaseContext;
 
-    public HrDatabaseContextTests()
+    public InMemoryHrDatabaseContextTests()
     {
-        _hrDatabaseContext = HrDbContextTestFactory.Create();
+        _hrDatabaseContext = InMemoryHrDatabaseContextFactory.Create();
     }
 
     [Fact]
