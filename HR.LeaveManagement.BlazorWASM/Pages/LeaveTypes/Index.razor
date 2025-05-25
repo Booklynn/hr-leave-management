@@ -1,6 +1,9 @@
 ﻿@page "/leave-types"
+@attribute [Authorize]
 
-<h1>Leave Types</h1>
+<PageTitle>Leave Types</PageTitle>
+
+<h3>Leave Types</h3>
 <hr />
 <div class="m-2 d-flex justify-content-end">
     <button @onclick="CreateLeaveType" class="btn btn-success">Add Leave Type</button>
@@ -36,10 +39,12 @@ else
                     <td>@leaveType.Name</td>
                     <td>@leaveType.DefaultDays</td>
                     <td>
-                        <button @onclick="() => AllocationLeaveType(leaveType.Id)" class="btn btn-dark">Allocate Leave</button>
-                        <button @onclick="() => EditLeaveType(leaveType.Id)" class="btn btn-warning">Edit</button>
+                        <AuthorizeView Roles="Administrator">
+                            <button @onclick="() => AllocationLeaveType(leaveType.Id)" class="btn btn-dark">Allocate Leave</button>
+                            <button @onclick="() => EditLeaveType(leaveType.Id)" class="btn btn-warning">Edit</button>
+                            <button @onclick="() => DeleteLeaveTypeAsync(leaveType.Id)" class="btn btn-danger">Delete</button>
+                        </AuthorizeView>
                         <button @onclick="() => DetailsLeaveType(leaveType.Id)" class="btn btn-info">Details</button>
-                        <button @onclick="() => DeleteLeaveTypeAsync(leaveType.Id)" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
             }
