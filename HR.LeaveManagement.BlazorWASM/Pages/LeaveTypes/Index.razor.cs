@@ -1,6 +1,9 @@
 using HR.LeaveManagement.BlazorWASM.Contracts;
 using HR.LeaveManagement.BlazorWASM.Models.LeaveTypes;
+using HR.LeaveManagement.BlazorWASM.Providers;
+using HR.LeaveManagement.BlazorWASM.Services.Base;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HR.LeaveManagement.BlazorWASM.Pages.LeaveTypes
 {
@@ -12,13 +15,26 @@ namespace HR.LeaveManagement.BlazorWASM.Pages.LeaveTypes
         [Inject]
         public required ILeaveTypeService LeaveTypeService { get; set; }
 
+        [Inject]
+        public required AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+
         public IReadOnlyList<LeaveTypeViewModel> LeaveTypes { get; private set; } = [];
 
         public string Message { get; set; } = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {
-            LeaveTypes = await LeaveTypeService.GetLeaveTypes();
+            var result = await ((APIAuthenticationStateProvider)AuthenticationStateProvider)
+                .GetAuthenticationStateAsync();
+
+            if (result.User?.Identity?.Name != null)
+            {
+                LeaveTypes = await LeaveTypeService.GetLeaveTypes();
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/login");
+            }
         }
 
         protected void CreateLeaveType()

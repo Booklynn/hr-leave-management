@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using HR.LeaveManagement.BlazorWASM.Contracts;
+using HR.LeaveManagement.BlazorWASM.Models.Auth;
 using HR.LeaveManagement.BlazorWASM.Providers;
 using HR.LeaveManagement.BlazorWASM.Services.Base;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 namespace HR.LeaveManagement.BlazorWASM.Services;
 
 public class AuthenticationService(
-    IClient client, 
+    IClient client,
     ILocalStorageService localStorageService,
     AuthenticationStateProvider authenticationStateProvider
     ) : BaseHttpService(client, localStorageService), IAuthenticationService
@@ -27,7 +28,7 @@ public class AuthenticationService(
                 return false;
             }
 
-            await localStorageService.SetItemAsync("Token", authenticationResponse.Token);
+            await _localStorageService.SetItemAsync("Token", authenticationResponse.Token);
             await ((APIAuthenticationStateProvider)authenticationStateProvider).LoggedIn();
 
             return true;
@@ -44,15 +45,15 @@ public class AuthenticationService(
         await ((APIAuthenticationStateProvider)authenticationStateProvider).LoggedOut();
     }
 
-    public async Task<bool> RegisterAsync(string firstName, string lastName, string userName, string email, string password)
+    public async Task<bool> RegisterAsync(RegisterViewModel model)
     {
         var response = await _client.RegisterAsync(new RegistrationRequest
         {
-           FirstName = firstName,
-           LastName = lastName,
-           UserName = userName,
-           Email = email,
-           Password = password
+           FirstName = model.FirstName,
+           LastName = model.LastName,
+           UserName = model.UserName,
+           Email = model.Email,
+           Password = model.Password
         });
 
         if (string.IsNullOrEmpty(response.UserId))

@@ -21,7 +21,7 @@ public class APIAuthenticationStateProvider(
 
         var savedToken = await localStorageService.GetItemAsync<string>("Token");
         var tokenContent = jwtSecurityTokenHandler.ReadJwtToken(savedToken);
-        if (tokenContent.ValidTo < DateTime.Now)
+        if (tokenContent.ValidTo < DateTime.UtcNow)
         {
             await localStorageService.RemoveItemAsync("Token");
             return new AuthenticationState(user);
