@@ -5,6 +5,7 @@ using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType
 using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetListLeaveTypes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace HR.LeaveManagement.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class LeaveTypesController(IDispatcher dispatcher) : ControllerBase
 {
     [HttpGet]

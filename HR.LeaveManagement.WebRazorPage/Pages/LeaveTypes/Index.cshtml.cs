@@ -1,10 +1,12 @@
 using HR.LeaveManagement.Application.Common;
 using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetListLeaveTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes;
 
+[Authorize]
 public class IndexModel(IDispatcher dispatcher) : PageModel
 {
     public IReadOnlyList<LeaveTypeDTO> LeaveTypes { get; private set; } = [];

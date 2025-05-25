@@ -32,10 +32,14 @@ else
                     <td>@leaveType.Name</td>
                     <td class="text-center" text-center">@leaveType.DefaultDays</td>
                     <td class="text-center">
-                        <button class="btn btn-dark">Allocate Leave</button>
-                        <a asp-page="Edit" asp-route-id="@leaveType.Id" class="btn btn-warning">Edit</a>
-                        <a asp-page="Details" asp-route-id="@leaveType.Id" class="btn btn-info">Details</a>
-                        <button data-id="@leaveType.Id" class="btn btn-danger deleteBtn">Delete</button>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <button class="btn btn-dark">Allocate Leave</button>
+                            <a asp-page="Edit" asp-route-id="@leaveType.Id" class="btn btn-warning">Edit</a>
+                            <button data-id="@leaveType.Id" class="btn btn-danger deleteBtn">Delete</button>
+                        }
+                         <a asp-page="Details" asp-route-id="@leaveType.Id" class="btn btn-info">Details</a>
+
                     </td>
                 </tr>
             }

@@ -89,7 +89,7 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d",
+                            Id = "7be551b9-05b3-41cf-addb-46630242f0ee",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "123e4567-e89b-12d3-a456-426614174000",
                             Email = "admin@localhost.com",
@@ -99,7 +99,7 @@ namespace HR.LeaveManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDk5qbi5hpt6TzLKI/qIeTijGdijcR2U3flFrlaykLq0P6MmqV2mHMJwRDLmibViqQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGIyXx0homo+X9IrnQnyQHAjinMD9nvymvTiUjeWUyHKR9PrN7Zt7B4XjSDho9B72w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d4e5f8a0-9c3b-4b17-8c45-1f2a3b4c5d6e",
                             TwoFactorEnabled = false,
@@ -117,7 +117,7 @@ namespace HR.LeaveManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@LOCALHOST.COM",
                             NormalizedUserName = "USER1@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEpfKGEq54YabGlknZ5LLdTK5yxlBtgQC7C64Awcyf0w4rczUyzSQRJvm7Sac1uj8w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO0qy9j3nDCosEi1XzXlLxFI/V3ZvUFSY8Q6kHFiJ6d/TIBCRigNDpGh20wyzBtKmg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "a1b2c3d4-e5f6-7890-abcd-1234567890ef",
                             TwoFactorEnabled = false,
@@ -159,7 +159,7 @@ namespace HR.LeaveManagement.Identity.Migrations
                         },
                         new
                         {
-                            Id = "e2bd6a01-90e3-497c-bc08-43f1fc11b98a",
+                            Id = "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -250,13 +250,13 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d",
+                            UserId = "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9",
                             RoleId = "3f5f8a64-2f1e-4c55-9d1c-861fef36be79"
                         },
                         new
                         {
-                            UserId = "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9",
-                            RoleId = "e2bd6a01-90e3-497c-bc08-43f1fc11b98a"
+                            UserId = "7be551b9-05b3-41cf-addb-46630242f0ee",
+                            RoleId = "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d"
                         });
                 });
 

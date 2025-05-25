@@ -3,12 +3,13 @@ using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.DTOs;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes;
 
-[ValidateAntiForgeryToken]
+[Authorize(Roles = "Administrator")]
 public class EditModel(IDispatcher dispatcher) : PageModel
 {
     [BindProperty]

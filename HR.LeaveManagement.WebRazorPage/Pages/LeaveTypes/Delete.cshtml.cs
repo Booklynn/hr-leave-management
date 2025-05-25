@@ -1,11 +1,13 @@
 using HR.LeaveManagement.Application.Common;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes;
 
+[Authorize(Roles = "Administrator")]
 public class DeleteModel(IDispatcher dispatcher, IAntiforgery antiforgery) : PageModel
 {
 

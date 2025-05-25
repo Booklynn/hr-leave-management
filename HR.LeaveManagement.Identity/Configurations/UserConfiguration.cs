@@ -14,7 +14,7 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
         builder.HasData(
             new ApplicationUser
             {
-                Id = "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d",
+                Id = "7be551b9-05b3-41cf-addb-46630242f0ee",
                 Email = "admin@localhost.com",
                 NormalizedEmail = "ADMIN@LOCALHOST.COM",
                 FirstName = "System",

@@ -1,12 +1,13 @@
 using HR.LeaveManagement.Application.Common;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HR.LeaveManagement.WebRazorPage.Pages.LeaveTypes;
 
-[ValidateAntiForgeryToken]
+[Authorize(Roles = "Administrator")]
 public class CreateModel(IDispatcher dispatcher) : PageModel
 {
     [BindProperty]

@@ -166,7 +166,7 @@ namespace HR.LeaveManagement.Identity.Migrations
                 values: new object[,]
                 {
                     { "3f5f8a64-2f1e-4c55-9d1c-861fef36be79", null, "Employee", "EMPLOYEE" },
-                    { "e2bd6a01-90e3-497c-bc08-43f1fc11b98a", null, "Administrator", "ADMINISTRATOR" }
+                    { "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d", null, "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -174,8 +174,8 @@ namespace HR.LeaveManagement.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d", 0, "123e4567-e89b-12d3-a456-426614174000", "admin@localhost.com", true, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDk5qbi5hpt6TzLKI/qIeTijGdijcR2U3flFrlaykLq0P6MmqV2mHMJwRDLmibViqQ==", null, false, "d4e5f8a0-9c3b-4b17-8c45-1f2a3b4c5d6e", false, "admin@localhost.com" },
-                    { "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9", 0, "fedcba98-7654-3210-fedc-ba9876543210", "user1@localhost.com", true, "User", "One", false, null, "USER1@LOCALHOST.COM", "USER1@LOCALHOST.COM", "AQAAAAIAAYagAAAAEEpfKGEq54YabGlknZ5LLdTK5yxlBtgQC7C64Awcyf0w4rczUyzSQRJvm7Sac1uj8w==", null, false, "a1b2c3d4-e5f6-7890-abcd-1234567890ef", false, "user1@localhost.com" }
+                    { "7be551b9-05b3-41cf-addb-46630242f0ee", 0, "123e4567-e89b-12d3-a456-426614174000", "admin@localhost.com", true, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGIyXx0homo+X9IrnQnyQHAjinMD9nvymvTiUjeWUyHKR9PrN7Zt7B4XjSDho9B72w==", null, false, "d4e5f8a0-9c3b-4b17-8c45-1f2a3b4c5d6e", false, "admin@localhost.com" },
+                    { "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9", 0, "fedcba98-7654-3210-fedc-ba9876543210", "user1@localhost.com", true, "User", "One", false, null, "USER1@LOCALHOST.COM", "USER1@LOCALHOST.COM", "AQAAAAIAAYagAAAAEO0qy9j3nDCosEi1XzXlLxFI/V3ZvUFSY8Q6kHFiJ6d/TIBCRigNDpGh20wyzBtKmg==", null, false, "a1b2c3d4-e5f6-7890-abcd-1234567890ef", false, "user1@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -183,8 +183,8 @@ namespace HR.LeaveManagement.Identity.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "3f5f8a64-2f1e-4c55-9d1c-861fef36be79", "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d" },
-                    { "e2bd6a01-90e3-497c-bc08-43f1fc11b98a", "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9" }
+                    { "3f9a6bba-5d7a-4a70-b5b1-cc6c15f1f87d", "7be551b9-05b3-41cf-addb-46630242f0ee" },
+                    { "3f5f8a64-2f1e-4c55-9d1c-861fef36be79", "a62e5c90-6fc5-49f3-ae14-41c6cb3424b9" }
                 });
 
             migrationBuilder.CreateIndex(

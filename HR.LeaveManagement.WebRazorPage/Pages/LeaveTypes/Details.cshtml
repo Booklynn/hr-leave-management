@@ -21,8 +21,12 @@
     </dl>
 
     <div>
-        <a asp-page="Edit" asp-route-id="@Model.LeaveTypeDetails.Id" asp-route-isFromDetailPage="true" class="btn btn-warning">Edit</a>
-        <button data-id="@Model.LeaveTypeDetails.Id" class="btn btn-danger deleteBtn">Delete</button>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.LeaveTypeDetails.Id" asp-route-isFromDetailPage="true" class="btn btn-warning">Edit</a>
+            <button data-id="@Model.LeaveTypeDetails.Id" class="btn btn-danger deleteBtn">Delete</button>
+        }
+
         <a asp-page="Index" class="btn btn-dark">Back</a>
     </div>
 
